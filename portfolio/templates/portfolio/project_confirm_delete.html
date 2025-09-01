@@ -1,0 +1,11 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Delete Project - My Portfolio{% endblock %}
+{% block content %}
+  <h2>Delete Project</h2>
+  <p>Are you sure you want to delete "{{ object.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'project-detail' object.pk %}">Cancel</a>
+  </form>
+{% endblock %}

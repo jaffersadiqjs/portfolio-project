@@ -1,0 +1,29 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Projects - My Portfolio{% endblock %}
+{% block content %}
+  <h2>Projects</h2>
+  <div class="grid">
+    {% for project in projects %}
+      <article class="card">
+        {% if project.image %}
+          <a href="{% url 'project-detail' project.pk %}">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+          </a>
+        {% endif %}
+        <h3><a href="{% url 'project-detail' project.pk %}">{{ project.title }}</a></h3>
+        <p>{{ project.description|truncatechars:140 }}</p>
+      </article>
+    {% empty %}
+      <p>No projects yet.</p>
+    {% endfor %}
+  </div>
+
+  {% if skills %}
+    <h2>Skills</h2>
+    <ul class="skills">
+      {% for s in skills %}
+        <li>{{ s.name }} — {{ s.proficiency_level }}%</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

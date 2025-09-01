@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Contact - My Portfolio{% endblock %}
+{% block content %}
+  <h2>Contact</h2>
+
+  <!-- Manual HTML form (using Django form object only for rendering/validation feedback) -->
+  <form method="post" class="form">
+    {% csrf_token %}
+    <p>
+      <label for="id_name">Name</label>
+      <input type="text" name="name" id="id_name" value="{{ form.name.value|default_if_none:'' }}" required>
+      {% if form.name.errors %}<small class="danger">{{ form.name.errors.0 }}</small>{% endif %}
+    </p>
+    <p>
+      <label for="id_email">Email</label>
+      <input type="email" name="email" id="id_email" value="{{ form.email.value|default_if_none:'' }}" required>
+      {% if form.email.errors %}<small class="danger">{{ form.email.errors.0 }}</small>{% endif %}
+    </p>
+    <p>
+      <label for="id_message">Message</label>
+      <textarea name="message" id="id_message" rows="5" required>{{ form.message.value|default_if_none:'' }}</textarea>
+      {% if form.message.errors %}<small class="danger">{{ form.message.errors.0 }}</small>{% endif %}
+    </p>
+    <button type="submit">Send Message</button>
+  </form>
+{% endblock %}
